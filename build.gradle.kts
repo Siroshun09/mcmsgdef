@@ -13,6 +13,8 @@ dependencies {
     compileOnlyApi(libs.adventure)
     compileOnlyApi(libs.adventure.text.minimessage)
 
+    testImplementation(libs.adventure)
+    testImplementation(libs.adventure.text.minimessage)
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
