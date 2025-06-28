@@ -1,0 +1,26 @@
+[versions]
+# common libraries
+adventure = "4.23.0"
+annotations = "26.0.2"
+
+# for testing
+junit = "5.13.1"
+
+# gradle plugins
+gradle-plugins = "1.2.1"
+
+[libraries]
+
+# common libraries
+annotations = { module = "org.jetbrains:annotations", version.ref = "annotations" }
+adventure = { module = "net.kyori:adventure-api", version.ref = "adventure" }
+adventure-text-minimessage = { module = "net.kyori:adventure-text-minimessage", version.ref = "adventure" }
+
+# for testing
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+
+[plugins]
+
+mavenCentralPortal = { id = "dev.siroshun.gradle.plugins.maven-central-portal", version.ref = "gradle-plugins" }
+mavenPublication = { id = "dev.siroshun.gradle.plugins.maven-publication", version.ref = "gradle-plugins" }
