@@ -4,9 +4,6 @@ plugins {
     alias(libs.plugins.mavenCentralPortal)
 }
 
-group = "dev.siroshun.mcmsgdef"
-version = "1.0.0-SNAPSHOT"
-
 repositories {
     mavenCentral()
 }
