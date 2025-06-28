@@ -1,7 +1,7 @@
 # mcmsgdef
 
 ![Maven Central](https://img.shields.io/maven-central/v/dev.siroshun.mcmsgdef/mcmsgdef)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Siroshun09/mcmsgdef/build.yml?branch=master)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Siroshun09/mcmsgdef/gradle.yml?branch=main)
 ![GitHub](https://img.shields.io/github/license/Siroshun09/mcmsgdef)
 
 A library to define and load messages for Adventure's translation system.
