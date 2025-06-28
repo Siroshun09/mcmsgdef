@@ -24,18 +24,12 @@ public final class LocaleParser {
         }
 
         String[] segments = SPLITTER.split(string, 3);
-        Locale.Builder builder = new Locale.Builder();
-
-        switch (segments.length) {
-            case 1 -> builder.setLanguage(segments[0]);
-            case 2 -> builder.setLanguage(segments[0]).setRegion(segments[1]);
-            case 3 -> builder.setLanguage(segments[0]).setRegion(segments[1]).setVariant(segments[2]);
-            default -> {
-                return null;
-            }
-        }
-
-        return builder.build();
+        return switch (segments.length) {
+            case 1 -> Locale.of(segments[0]);
+            case 2 -> Locale.of(segments[0], segments[1]);
+            case 3 -> Locale.of(segments[0], segments[1], segments[2]);
+            default -> null;
+        };
     }
 
     private LocaleParser() {
