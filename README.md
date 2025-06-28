@@ -12,9 +12,34 @@ A library to define and load messages for Adventure's translation system.
 - Adventure 4.23.0+
   - Paper 1.21.6+
 
+## Installation
+
+### For Maven:
+
+```xml
+    <dependency>
+        <groupId>dev.siroshun.mcmsgdef</groupId>
+        <artifactId>mcmsgdef</artifactId>
+        <version>1.0.0-rc.1</version>
+    </dependency>
+```
+
+### For Gradle:
+
+```groovy
+dependencies {
+    compile 'dev.siroshun.mcmsgdef:mcmsgdef:1.0.0-rc.1'
+}
+```
+
+```kotlin
+dependencies {
+    implementation("dev.siroshun.mcmsgdef:mcmsgdef:1.0.0-rc.1")
+}
+```
+
 ## License
 
 This project is under the Apache License v2. Please see [LICENSE](LICENSE) for more info.
 
 Copyright © 2025, Siroshun09
-
