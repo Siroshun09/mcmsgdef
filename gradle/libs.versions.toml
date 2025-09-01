@@ -1,7 +1,7 @@
 [versions]
 # common libraries
 adventure = "4.24.0"
-annotations = "26.0.2"
+annotations = "26.0.2-1"
 
 # for testing
 junit = "5.13.4"
