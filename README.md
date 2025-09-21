@@ -20,7 +20,7 @@ A library to define and load messages for Adventure's translation system.
     <dependency>
         <groupId>dev.siroshun.mcmsgdef</groupId>
         <artifactId>mcmsgdef</artifactId>
-        <version>1.0.0-rc.1</version>
+        <version>1.0.0</version>
     </dependency>
 ```
 
@@ -28,13 +28,13 @@ A library to define and load messages for Adventure's translation system.
 
 ```groovy
 dependencies {
-    compile 'dev.siroshun.mcmsgdef:mcmsgdef:1.0.0-rc.1'
+    compile 'dev.siroshun.mcmsgdef:mcmsgdef:1.0.0'
 }
 ```
 
 ```kotlin
 dependencies {
-    implementation("dev.siroshun.mcmsgdef:mcmsgdef:1.0.0-rc.1")
+    implementation("dev.siroshun.mcmsgdef:mcmsgdef:1.0.0")
 }
 ```
 
