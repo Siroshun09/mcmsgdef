@@ -79,10 +79,9 @@ public final class MessageProcessors {
             if (loaded.messageMap().putIfAbsent(entry.getKey(), entry.getValue()) == null) {
                 missingMessages.put(entry.getKey(), entry.getValue());
             }
-
-            if (messageAppender != null && !missingMessages.isEmpty()) {
-                messageAppender.append(loaded.filepath(), missingMessages);
-            }
+        }
+        if (messageAppender != null && !missingMessages.isEmpty()) {
+            messageAppender.append(loaded.filepath(), missingMessages);
         }
 
         return loaded.messageMap();
