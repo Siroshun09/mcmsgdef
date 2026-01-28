@@ -48,7 +48,9 @@ public final class MessageProcessors {
     public static @NotNull Loader<LoadedMessageMap, Map<String, String>> appendMissingMessages(@NotNull Loader<Locale, @Nullable Map<String, String>> defaultMessageLoader, @Nullable MessageAppender<Path, Map<String, String>> messageAppender) {
         return loaded -> {
             Map<String, String> defaultMessageMap = defaultMessageLoader.load(loaded.locale());
-            appendMissingMessages(loaded, defaultMessageMap, messageAppender);
+            if (defaultMessageMap != null) {
+                appendMissingMessages(loaded, defaultMessageMap, messageAppender);
+            }
             return loaded.messageMap();
         };
     }
