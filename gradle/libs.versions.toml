@@ -1,6 +1,6 @@
 [versions]
 # common libraries
-adventure = "5.0.0"
+adventure = "5.0.1"
 annotations = "26.1.0"
 
 # for testing
