@@ -39,8 +39,9 @@ public final class DefaultMessageDefiner {
     public @NotNull MessageKey define(@NotNull String key, @NotNull String defaultMessage) {
         Objects.requireNonNull(key, "key cannot be null");
         Objects.requireNonNull(defaultMessage, "defaultMessage cannot be null");
-        this.map.put(key, defaultMessage);
-        return MessageKey.key(key);
+        MessageKey ret = MessageKey.key(key);
+        this.map.put(ret.key(), defaultMessage);
+        return ret;
     }
 
     /**

@@ -56,6 +56,7 @@ class DefaultMessageDefinerTest {
     void testEmptyKey() {
         DefaultMessageDefiner definer = DefaultMessageDefiner.create();
         assertThrows(IllegalArgumentException.class, () -> definer.define("", "test message"));
+        assertTrue(definer.getCollectedMessages().isEmpty());
     }
 
     @SuppressWarnings("DataFlowIssue")
@@ -63,6 +64,7 @@ class DefaultMessageDefinerTest {
     void testNullKey() {
         DefaultMessageDefiner definer = DefaultMessageDefiner.create();
         assertThrows(NullPointerException.class, () -> definer.define(null, "test message"));
+        assertTrue(definer.getCollectedMessages().isEmpty());
     }
 
     @SuppressWarnings("DataFlowIssue")
