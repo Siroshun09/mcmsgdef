@@ -44,6 +44,16 @@ public final class DefaultMessageDefiner {
     }
 
     /**
+     * Copies the messages from the given {@link DefaultMessageDefiner}.
+     *
+     * @param other the {@link DefaultMessageDefiner} to copy messages from
+     */
+    public void copyFrom(DefaultMessageDefiner other) {
+        Objects.requireNonNull(other);
+        this.map.putAll(other.map);
+    }
+
+    /**
      * Gets the map of defined keys and their default messages.
      *
      * @return the map of defined keys and their default messages

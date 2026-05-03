@@ -35,6 +35,21 @@ class DefaultMessageDefinerTest {
             List.of(Map.entry("test1", "test1 message"), Map.entry("test2", "test2 message"), Map.entry("test3", "test3 message")),
             map.entrySet().stream().toList()
         );
+
+        DefaultMessageDefiner otherDefiner = DefaultMessageDefiner.create();
+        otherDefiner.define("first", "first message");
+        otherDefiner.copyFrom(definer);
+        otherDefiner.define("last", "last message");
+
+        // ordered entries
+        assertEquals(
+            List.of(
+                Map.entry("first", "first message"),
+                Map.entry("test1", "test1 message"), Map.entry("test2", "test2 message"), Map.entry("test3", "test3 message"),
+                Map.entry("last", "last message")
+            ),
+            otherDefiner.getCollectedMessages().entrySet().stream().toList()
+        );
     }
 
     @Test
