@@ -39,7 +39,7 @@ public final class DirectorySource {
      */
     @Contract("_ -> new")
     public static @NotNull DirectorySource create(@NotNull Path directory) {
-        return new DirectorySource(Objects.requireNonNull(directory), Collections.emptySet(), null, null);
+        return new DirectorySource(Objects.requireNonNull(directory), Collections.emptySet(), null, null, null);
     }
 
     /**
@@ -50,7 +50,7 @@ public final class DirectorySource {
      */
     @Contract("_ -> new")
     public static @NotNull DirectorySource forStringMessageMap(@NotNull Path directory) {
-        return new DirectorySource(Objects.requireNonNull(directory), Collections.emptySet(), null, null);
+        return new DirectorySource(Objects.requireNonNull(directory), Collections.emptySet(), null, null, null);
     }
 
     /**
@@ -66,15 +66,18 @@ public final class DirectorySource {
 
     private final Path directory;
     private final @Unmodifiable Set<Locale> defaultLocales;
+    private final @Nullable Locale primaryLocale;
     private final @Nullable FileExtension fileExtension;
     private final @Nullable Loader<LoadContext, LoadedMessageMap> loader;
 
     private DirectorySource(@NotNull Path directory,
                             @NotNull Set<Locale> defaultLocales,
+                            @Nullable Locale primaryLocale,
                             @Nullable FileExtension fileExtension,
                             @Nullable Loader<LoadContext, LoadedMessageMap> loader) {
         this.directory = directory;
         this.defaultLocales = defaultLocales;
+        this.primaryLocale = primaryLocale;
         this.fileExtension = fileExtension;
         this.loader = loader;
     }
@@ -86,7 +89,7 @@ public final class DirectorySource {
      * @return a new {@link DirectorySource} instance
      */
     public @NotNull DirectorySource fileExtension(@NotNull FileExtension fileExtension) {
-        return new DirectorySource(this.directory, this.defaultLocales, Objects.requireNonNull(fileExtension), this.loader);
+        return new DirectorySource(this.directory, this.defaultLocales, this.primaryLocale, Objects.requireNonNull(fileExtension), this.loader);
     }
 
     /**
@@ -128,7 +131,19 @@ public final class DirectorySource {
             newDefaultLocales.addAll(this.defaultLocales);
             newDefaultLocales.addAll(locales);
         }
-        return new DirectorySource(this.directory, Collections.unmodifiableSet(newDefaultLocales), this.fileExtension, this.loader);
+        return new DirectorySource(this.directory, Collections.unmodifiableSet(newDefaultLocales), this.primaryLocale, this.fileExtension, this.loader);
+    }
+
+    /**
+     * Sets the primary {@link Locale}.
+     * <p>
+     * This {@link Locale} will be used to {@link net.kyori.adventure.translation.TranslationStore#defaultLocale(Locale)}.
+     *
+     * @param locale the primary {@link Locale}
+     * @return a new {@link DirectorySource} instance
+     */
+    public @NotNull DirectorySource primaryLocale(@NotNull Locale locale) {
+        return new DirectorySource(this.directory, this.defaultLocales, Objects.requireNonNull(locale), this.fileExtension, this.loader);
     }
 
     /**
@@ -147,6 +162,7 @@ public final class DirectorySource {
         return new DirectorySource(
             this.directory,
             this.defaultLocales,
+            this.primaryLocale,
             this.fileExtension,
             context -> new LoadedMessageMap(context.filepath, context.locale, loader.apply(context.filepath))
         );
@@ -166,6 +182,7 @@ public final class DirectorySource {
         return new DirectorySource(
             this.directory,
             this.defaultLocales,
+            this.primaryLocale,
             this.fileExtension,
             context -> new LoadedMessageMap(context.filepath, context.locale, processor.apply(this.loader.apply(context)))
         );
@@ -220,7 +237,13 @@ public final class DirectorySource {
      */
     public @NotNull MiniMessageTranslationStore loadAsMiniMessageTranslationStore(@NotNull Key key) throws IOException {
         MiniMessageTranslationStore store = MiniMessageTranslationStore.create(key);
+
         this.load(source -> store.registerAll(source.locale(), source.messageMap()));
+
+        if (this.primaryLocale != null) {
+            store.defaultLocale(this.primaryLocale);
+        }
+
         return store;
     }
 
