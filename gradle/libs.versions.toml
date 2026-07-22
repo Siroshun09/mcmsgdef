@@ -4,7 +4,7 @@ adventure = "5.2.0"
 annotations = "26.1.0"
 
 # for testing
-junit = "6.1.1"
+junit = "6.1.2"
 
 # gradle plugins
 gradle-plugins = "1.8.4"
